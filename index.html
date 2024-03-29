@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sagun Decorators and Caterers</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <style>
+      /* Custom CSS for navigation bar */
+      .navbar {
+        background-color: #343a40; /* Dark background */
+      }
+
+      .navbar-brand,
+      .navbar-nav .nav-link {
+        color: white !important; /* White text */
+      }
+
+      .navbar-nav .nav-link {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: #ffc107 !important; /* Yellow color on hover */
+      }
+      
+      /* Custom CSS for Jumbotron Section */
+      .jumbotron {
+        height: 600px;
+        background-image: url('image/decoration-2.jpg'); /* Update with your image */
+        background-size: cover;
+        background-position: center;
+        color: white;
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+      }
+      
+
+      .jumbotron h1 {
+        font-size: 3rem; /* Adjust font size as needed */
+        margin-bottom: 20px;
+      }
+
+      .jumbotron p {
+        font-size: 1.25rem; /* Adjust font size as needed */
+        margin-bottom: 30px;
+      }
+
+      .jumbotron .btn-primary {
+        background-color: #ffc107; /* Update color as needed */
+        border-color: #ffc107; /* Update color as needed */
+      }
+
+      .jumbotron .btn-primary:hover {
+        background-color: #e0a800; /* Update color as needed */
+        border-color: #e0a800; /* Update color as needed */
+      }
+      .service {
+        margin-bottom: 30px;
+        
+      }
+      .service img {
+        width: 100%;
+        height: 250px; /* Equal height for all images */
+        object-fit: cover;
+        border-radius: 20px;
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+    }
+
+    .service img:hover {
+        transform: scale(1.05); /* Scale up the image on hover */
+        box-shadow: 0 20px 30px rgba(255,255,255,0.2), 0 10px 10px rgba(255,255,255,0.22); /* White shadow on hover */
+    }
+      #services {
+        background-color: #f8f9fa;
+        padding: 50px 0;
+      }
+      #services h2 {
+        color: #343a40;
+      }
+      .gallery-heading-container {
+        position: relative;
+      }
+      
+      .gallery-heading {
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+        color: white; /* Adjust the color as needed */
+        font-size: 3rem;
+              }
+      /* Style for the "View All Photos" button */
+      .view-all-button-container {
+        position: absolute;
+        bottom: 20px; /* Adjust the distance from the bottom as needed */
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .view-all-button {
+        background-color: red; /* Button background color */
+        color: white; /* Button text color */
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .view-all-button:hover {
+        background-color: #45a049; /* Button background color on hover */
+      }
+
+      /* Hide carousel indicators */
+      .carousel-indicators {
+        display: none;
+      }
+
+      /* Custom CSS for carousel */
+      .carousel-item img {
+        height: 700px; /* Set the height of carousel images */
+        width: 100%;
+        object-fit: cover;
+      }
+      /* Custom CSS for carousel control arrows */
+      .carousel-control-prev,
+      .carousel-control-next {
+        font-size: 2rem; /* Increase the font size to make the arrows larger */
+        color: black !important; /* Set the color to black */
+      }
+
+      /* Custom CSS for arrow icons */
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        background-color: black; /* Set the background color of the arrow icons */
+        width: 40px; /* Set the width of the arrow icons */
+        height: 40px; /* Set the height of the arrow icons */
+        border-radius: 50%; /* Make the arrow icons circular */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Custom CSS for arrow icon color on hover */
+      .carousel-control-prev:hover .carousel-control-prev-icon,
+      .carousel-control-next:hover .carousel-control-next-icon {
+        background-color: #000; /* Set the hover background color */
+      }
+
+      /* Custom CSS for testimonial */
+      
+      .testimonial-item {
+        background-color: #fff; /* Bright background to stand out */
+        transition: transform 0.5s ease, box-shadow 0.5s ease; /* Slower, smoother transition */
+        /* Increase padding for better spacing */
+        padding: 20px;
+        /* Slightly rounded corners for a softer look */
+        border-radius: 8px;
+      }
+      
+      .testimonial-item:hover {
+        transform: translateY(-10px); /* More noticeable lift effect on hover */
+        /* More dramatic shadow for a deeper 3D effect */
+        box-shadow: 0 20px 30px rgba(0,0,0,0.2), 0 10px 10px rgba(0,0,0,0.22); 
+      }
+      
+      .testimonial-item img {
+        width: auto; /* Keep aspect ratio intact */
+        /* More pronounced border to highlight the image */
+        border: 5px solid #fff;
+        /* Increased shadow for more depth */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        /* Smooth transition for the image as well */
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+      }
+      
+      .testimonial-item img:hover {
+        /* Scale the image slightly on hover for an engaging effect */
+        transform: scale(1.05);
+        /* Stronger shadow on hover specifically for the image */
+        box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      }
+      
+      
+      @media (max-width: 768px) {
+        .testimonial-item {
+          margin-bottom: 20px; /* Spacing adjustments for smaller devices */
+        }
+      }
+      
+      /* Enhancing the Contact Us section with a darker theme and more attractive styling */
+      #contact {
+        position: relative; /* Establishing a stacking context for pseudo-element */
+        padding: 60px 0;
+        color: #ffffff; /* Light text for readability */
+        overflow: hidden; /* Ensures pseudo-element does not overflow the container */
+      }
+      
+      #contact::before {
+        content: ''; /* Required for pseudo-elements */
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('sample-2.jpg'); /* Path to your image */
+        background-size: cover; /* Ensures the background covers the entire element */
+        background-position: center; /* Centers the background image */
+        opacity: 0.5; /* Setting the desired opacity */
+        z-index: -1; /* Ensures the content appears above the pseudo-element */
+      }
+      
+
+      #contact h1 {
+        color: #f8f9fa;
+        position: relative; /* Add this line */
+        z-index: 2; /* Ensure it's above the pseudo-element */
+        margin-bottom: 30px; /* Increased spacing for better visual separation */
+      }
+      
+
+      #contact form {
+        background-color: #222831; /* Even darker shade for the form background */
+        padding: 40px; /* Increased padding for a more spacious layout */
+        border-radius: 15px; /* Slightly larger radius for softer edges */
+        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.2); /* More pronounced shadow for a subtle depth effect */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for interactive feedback */
+      }
+
+      #contact form:hover {
+        transform: translateY(-10px); /* Slight upward movement on hover for a dynamic effect */
+        box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.25); /* Enhanced shadow on hover for added depth */
+      }
+
+      #contact form label {
+        font-weight: 600; /* Slightly bolder labels for better legibility */
+        color: #f8f9fa; /* Ensuring label text is readable against the dark form background */
+      }
+
+      #contact form input[type="text"],
+      #contact form input[type="email"],
+      #contact form input[type="tel"],
+      #contact form textarea {
+        background-color: #39404a; /* Slightly lighter than form background for distinction */
+        border: 1px solid #ced4da; /* Subtle border to define edges */
+        color: #f8f9fa; /* Light text for contrast and readability */
+        margin-bottom: 25px; /* Adjusted spacing for a balanced layout */
+      }
+
+      #contact form input[type="text"]::placeholder,
+      #contact form input[type="email"]::placeholder,
+      #contact form input[type="tel"]::placeholder,
+      #contact form textarea::placeholder {
+        color: #adb5bd; /* Lighter placeholder text for an elegant look */
+      }
+
+      #contact form textarea {
+        resize: none; /* Disabling resize for consistent field appearance */
+      }
+
+      #contact form button[type="submit"] {
+        background-color: #007bff; /* Bright color for the submit button to stand out */
+        border: none;
+         /* Adequate padding for a better touch area */
+        font-size: 18px; /* Larger font for a more clickable appearance */
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+      }
+
+      #contact form button[type="submit"]:hover {
+        background-color: #0056b3; /* Darker shade on hover for an interactive feel */
+      }
+
+      /* Custom CSS for About Us section */
+      #about {
+        padding: 50px 0;
+      }
+
+      #about h2 {
+        color: #343a40;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      #about p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      #about .img-fluid {
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+      }
+      /* Footer CSS */
+      .footer {
+        padding: 10px 0;
+      }
+
+      h2.text-center.mt-3 {
+        color: white; /* Sets the text color to white */
+        width: 100%; /* Ensures the element spans the full width */
+        text-align: center; /* Centers the text within the element */
+        padding: 10px 0; /* Adds some padding for better spacing */
+      }
+
+      .footer p {
+        margin-bottom: 0;
+      }
+
+      .footer ul li {
+        display: inline;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Sagun Decorators And Caterers</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#gallery">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#testimonial">Testimonial</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Jumbotron Section -->
+        <!-- Jumbotron Section -->
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1>Welcome to Sagun Decorators And Caterers</h1>
+        <p class="lead">Your perfect choice for wedding planning and event organization.</p>
+        <a class="btn btn-primary btn-lg" href="#services" role="button">Explore Our Services</a>
+      </div>
+    </section>
+
+
+    <!-- Services Section -->
+    <!-- Services Section -->
+    <section id="services">
+      <div class="container">
+        <h2 class="text-center mb-5">OUR SERVICES</h2>
+        <div class="row">
+          <!-- First row of services -->
+          <div class="col-md-3 service">
+            <img src="sample-1.jpg" alt="Decoration" class="img-fluid" />
+            <h3 class="mt-3">Decoration</h3>
+            <p>Transform your event with our exquisite decoration services, including lighting, tent, pandal, flower arrangements, and balloon decor.</p>
+          </div>
+          <div class="col-md-3 service">
+            <img src="catering.jpg" alt="Catering" class="img-fluid" />
+            <h3 class="mt-3">Catering</h3>
+            <p>Delight your guests with our sumptuous catering options, offering a diverse menu of delicious cuisines prepared by our skilled chefs.</p>
+          </div>
+          <div class="col-md-3 service">
+            <img src="photography.jpg" alt="Photography" class="img-fluid" />
+            <h3 class="mt-3">Video Photography</h3>
+            <p>Capture the precious moments of your special day with our professional video photography services.</p>
+          </div>
+          <div class="col-md-3 service">
+            <img src="light-decoration.jpg" alt="Lighting" class="img-fluid" />
+            <h3 class="mt-3">Lighting</h3>
+            <p>From subtle mood lighting to vibrant displays, we create captivating atmospheres that set the perfect tone for your event.</p>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Second row of services -->
+          <div class="col-md-3 service">
+            <img src="waiter.jpg" alt="Waiter" class="img-fluid" />
+            <h3 class="mt-3">Waiter/Crockery</h3>
+            <p>Experience seamless service with our professional waitstaff and high-quality crockery arrangements.</p>
+          </div>
+          <div class="col-md-3 service">
+            <img src="makeup.jpg" alt="Makeup" class="img-fluid" />
+            <h3 class="mt-3">Makeup</h3>
+            <p>Look and feel your best with our makeup services.</p>
+          </div>
+          <div class="col-md-3 service">
+            <img src="sample-2.jpg" alt="Mehendi" class="img-fluid" />
+            <h3 class="mt-3">Mehendi</h3>
+            <p>Our skilled artists create beautiful patterns that adorn your hands and feet, adding traditional charm to your celebration.</p>
+          </div>
+          <div class="col-md-3 service">
+            <img src="venue-booking.jpg" alt="Venue Booking" class="img-fluid" />
+            <h3 class="mt-3">Venue Booking</h3>
+            <p>From elegant banquet halls to scenic outdoor locations, we help you find the ideal setting for your celebration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+<section id="gallery">
+  <div class="gallery-heading-container">
+    <h2 class="gallery-heading text-center mb-5">GALLERY</h2>
+    <div class="carousel-container">
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <!-- Carousel inner -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="sample-1.jpg" alt="First slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="sample-2.jpg" alt="Second slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="sample-3.jpg" alt="Third slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="sample-4.jpg" alt="Fourth slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="sample-5.jpg" alt="Fifth slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="sample-6.jpg" alt="Sixth slide" />
+          </div>
+        </div>
+        <!-- Carousel controls -->
+        <a
+          class="carousel-control-prev"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </a>
+      </div>
+      <div class="view-all-button-container">
+        <a href="photos.html"  style="text-decoration: none;">
+          <button class="view-all-button">View All Photos</button>
+      </a>      
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+<section id="testimonial" class="container mt-5 ">
+  <h2 class="text-center mb-5">TESTIMONIALS</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="testimonial-item text-center p-4 shadow rounded h-100 d-flex flex-column justify-content-between">
+        <img src="people-1.jpg" class="rounded-circle mb-4 mx-auto" alt="User 1" style="width: 120px; height: 120px; object-fit: cover;"/>
+        <p>
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu leo eu quam blandit tempor. Sed consequat vehicula arcu id dignissim."
+        </p>
+        <div>
+          <h5 class="mt-4">John Doe</h5>
+          <p class="text-muted">Event Organizer</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="testimonial-item text-center p-4 shadow rounded h-100 d-flex flex-column justify-content-between">
+        <img src="people-4.jpg" class="rounded-circle mb-4 mx-auto" alt="User 2" style="width: 120px; height: 120px; object-fit: cover;"/>
+        <p>
+          "Nulla facilisi. Proin sit amet vestibulum elit. Donec aliquam vel velit ut tincidunt. Mauris sollicitudin volutpat risus, vitae ultricies magna lobortis sit amet."
+        </p>
+        <div>
+          <h5 class="mt-4">Jane Smith</h5>
+          <p class="text-muted">Bride</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="testimonial-item text-center p-4 shadow rounded h-100 d-flex flex-column justify-content-between">
+        <img src="people-3.jpg" class="rounded-circle mb-4 mx-auto" alt="User 3" style="width: 120px; height: 120px; object-fit: cover;"/>
+        <p>
+          "Aenean sollicitudin, vel rhoncus mi fermentum. In hac habitasse platea dictumst. Morbi vel nunc felis. Integer ut nisi eget quam consectetur tristique."
+        </p>
+        <div>
+          <h5 class="mt-4">David Brown</h5>
+          <p class="text-muted">Groom</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class=" mt-5">
+      <h1 class="text-center mb-5">CONTACT US</h1>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea
+                class="form-control"
+                id="message"
+                rows="5"
+                placeholder="Enter your message"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="container mt-5">
+      <h2 class="mb-4">ABOUT US</h2>
+      <div class="row">
+        <!-- Left side: About company description -->
+        <div class="col-md-6">
+          <p>
+            Sagun Decorators and Caterers is your perfect choice for wedding
+            planning and event organization. With years of experience in the
+            industry, we have been creating memorable events that exceed our
+            clients' expectations.
+          </p>
+          <p>
+            Our team of dedicated professionals is committed to turning your
+            vision into reality. From elegant decorations to mouth-watering
+            cuisines, we take care of every detail to ensure your special day is
+            nothing short of perfection.
+          </p>
+          <p>
+            At Sagun Decorators and Caterers, we believe in creating
+            unforgettable moments that you and your guests will cherish for a
+            lifetime. Let us make your dream event a reality.
+          </p>
+        </div>
+        <!-- Right side: Image -->
+        <div class="col-md-6">
+          <img
+            src="sample-3.jpg"
+            alt="About Us Image"
+            class="img-fluid rounded"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="map">
+      <div class=" bg-dark">
+        <h2 class="text-center mt-3">OUR LOCATION</h2>
+        <div class="row">
+          <div class="col">
+            <!-- Embedded Google Map -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1943.0791337648532!2d82.97402198074653!3d25.296957338256535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399dde0bfe775b75%3A0xf3db92b7ff917b26!2sMehmoorganj%2C%20Varanasi%2C%20Uttar%20Pradesh%2C%20India!5e0!3m2!1sen!2sus!4v1648940507194!5m2!1sen!2sus"
+              width="100%"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            <!-- Direction Arrow -->
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=Mehmoorganj, Varanasi, Uttar Pradesh, India"
+              target="_blank"
+            >
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer bg-dark text-white">
+      <div >
+        <div class="row">
+          <div class="col-md-6">
+
+            <p>
+              &copy; 2024 Sagun Decorators and Caterers. All rights reserved.
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <!-- jQuery -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+    ></script>
+    
+  </body>
+</html>
